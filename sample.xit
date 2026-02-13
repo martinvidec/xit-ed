@@ -1,0 +1,17 @@
+Welcome to Xit Editor
+[ ] ! Read the README
+[ ] Try adding a new task
+[x] Install the app
+
+Features to explore
+[ ] !! Click checkboxes to toggle status #important
+[ ] Tags work like #this or #with=values
+[ ] Due dates look like this -> 2024-03-31
+[@] This task is ongoing
+[~] This one is obsolete
+[?] And this one is in question
+
+Shopping List
+[ ] Milk #groceries
+[ ] Bread #groceries
+[ ] Coffee #groceries #priority=high

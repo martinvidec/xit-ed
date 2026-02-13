@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		001 /* XitEditorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101; };
+		002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102; };
+		003 /* XitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103; };
+		004 /* XitParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104; };
+		005 /* XitFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105; };
+		006 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106; };
+		007 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107; };
+		008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 201; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		101 /* XitEditorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XitEditorApp.swift; sourceTree = "<group>"; };
+		102 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		103 /* XitItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XitItem.swift; sourceTree = "<group>"; };
+		104 /* XitParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XitParser.swift; sourceTree = "<group>"; };
+		105 /* XitFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XitFileDocument.swift; sourceTree = "<group>"; };
+		106 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		107 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
+		201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		301 /* XitEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XitEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		501 /* XitEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XitEditor.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G01 = {
+			isa = PBXGroup;
+			children = (
+				G02 /* XitEditor */,
+				G06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G02 /* XitEditor */ = {
+			isa = PBXGroup;
+			children = (
+				101 /* XitEditorApp.swift */,
+				G03 /* Models */,
+				G04 /* Views */,
+				G05 /* Parser */,
+				G07 /* Resources */,
+				401 /* Info.plist */,
+				501 /* XitEditor.entitlements */,
+			);
+			path = XitEditor;
+			sourceTree = "<group>";
+		};
+		G03 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				103 /* XitItem.swift */,
+				105 /* XitFileDocument.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G04 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				102 /* ContentView.swift */,
+				106 /* ItemListView.swift */,
+				107 /* ItemRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G05 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				104 /* XitParser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		G06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				301 /* XitEditor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				201 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T01 /* XitEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C03 /* Build configuration list for PBXNativeTarget "XitEditor" */;
+			buildPhases = (
+				S01 /* Sources */,
+				F01 /* Frameworks */,
+				R01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XitEditor;
+			productName = XitEditor;
+			productReference = 301 /* XitEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P01 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					T01 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = C01 /* Build configuration list for PBXProject "XitEditor" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G01;
+			productRefGroup = G06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				T01 /* XitEditor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				008 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				001 /* XitEditorApp.swift in Sources */,
+				002 /* ContentView.swift in Sources */,
+				003 /* XitItem.swift in Sources */,
+				004 /* XitParser.swift in Sources */,
+				005 /* XitFileDocument.swift in Sources */,
+				006 /* ItemListView.swift in Sources */,
+				007 /* ItemRow.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XitEditor/XitEditor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = XitEditor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Xit Editor";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.martinvidec.xit-editor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XitEditor/XitEditor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = XitEditor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Xit Editor";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.martinvidec.xit-editor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01 /* Build configuration list for PBXProject "XitEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B01 /* Debug */,
+				B02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C03 /* Build configuration list for PBXNativeTarget "XitEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B03 /* Debug */,
+				B04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P01 /* Project object */;
+}
