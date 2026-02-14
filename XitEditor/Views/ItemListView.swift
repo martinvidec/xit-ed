@@ -4,7 +4,15 @@ struct ItemListView: View {
     @Binding var group: XitGroup
     @Binding var selectedItemId: UUID?
     @State private var newItemText = ""
+    @State private var statusFilter: XitStatus? = nil
     @FocusState private var isAddingItem: Bool
+    
+    private var filteredItemIndices: [Int] {
+        group.items.indices.filter { index in
+            guard let filter = statusFilter else { return true }
+            return group.items[index].status == filter
+        }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -26,12 +34,12 @@ struct ItemListView: View {
             
             // Item list
             List(selection: $selectedItemId) {
-                ForEach($group.items) { $item in
-                    ItemRow(item: $item)
-                        .tag(item.id)
+                ForEach(filteredItemIndices, id: \.self) { index in
+                    ItemRow(item: $group.items[index])
+                        .tag(group.items[index].id)
                 }
-                .onDelete(perform: deleteItems)
-                .onMove(perform: moveItems)
+                .onDelete(perform: deleteFilteredItems)
+                .onMove(perform: statusFilter == nil ? moveItems : nil)
                 
                 // Quick add field
                 HStack(spacing: 12) {
@@ -56,13 +64,29 @@ struct ItemListView: View {
                 }
                 
                 Menu {
-                    Button("Show All") { }
+                    Button {
+                        statusFilter = nil
+                    } label: {
+                        if statusFilter == nil {
+                            Label("Show All", systemImage: "checkmark")
+                        } else {
+                            Text("Show All")
+                        }
+                    }
                     Divider()
                     ForEach(XitStatus.allCases, id: \.self) { status in
-                        Button(status.displayName) { }
+                        Button {
+                            statusFilter = status
+                        } label: {
+                            if statusFilter == status {
+                                Label(status.displayName, systemImage: "checkmark")
+                            } else {
+                                Text(status.displayName)
+                            }
+                        }
                     }
                 } label: {
-                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    Label("Filter", systemImage: statusFilter == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
                 }
             }
         }
@@ -86,6 +110,13 @@ struct ItemListView: View {
     
     private func deleteItems(at offsets: IndexSet) {
         group.items.remove(atOffsets: offsets)
+    }
+    
+    private func deleteFilteredItems(at offsets: IndexSet) {
+        let indicesToDelete = offsets.map { filteredItemIndices[$0] }
+        for index in indicesToDelete.sorted().reversed() {
+            group.items.remove(at: index)
+        }
     }
     
     private func moveItems(from source: IndexSet, to destination: Int) {
