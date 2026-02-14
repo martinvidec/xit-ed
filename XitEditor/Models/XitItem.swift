@@ -66,7 +66,7 @@ struct XitTag: Identifiable, Equatable {
 
 /// Represents a due date in a xit! item
 struct XitDueDate: Equatable {
-    enum DateType {
+    enum DateType: Equatable {
         case day(Date)
         case month(year: Int, month: Int)
         case week(year: Int, week: Int)
