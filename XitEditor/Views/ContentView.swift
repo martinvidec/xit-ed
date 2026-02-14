@@ -40,13 +40,19 @@ struct ContentView: View {
                     selectedItemId: $selectedItemId
                 )
             } else {
-                ContentUnavailableView {
-                    Label("No Groups", systemImage: "folder")
-                } description: {
+                VStack(spacing: 16) {
+                    Image(systemName: "folder")
+                        .font(.system(size: 48))
+                        .foregroundColor(.secondary)
+                    Text("No Groups")
+                        .font(.title2)
+                        .fontWeight(.semibold)
                     Text("Create a group to get started")
-                } actions: {
+                        .foregroundColor(.secondary)
                     Button("Add Group", action: addGroup)
+                        .buttonStyle(.borderedProminent)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .addNewItem)) { _ in
