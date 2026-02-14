@@ -252,7 +252,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XitEditor/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Xit Editor";
+				INFOPLIST_KEY_CFBundleDisplayName = "xit!ed";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -279,7 +279,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XitEditor/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Xit Editor";
+				INFOPLIST_KEY_CFBundleDisplayName = "xit!ed";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
