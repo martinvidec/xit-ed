@@ -7,11 +7,12 @@ struct XitEditorApp: App {
             ContentView(document: file.$document)
         }
         .commands {
-            CommandGroup(replacing: .newItem) {
-                Button("New Item") {
+            CommandGroup(replacing: .newItem) { }
+            CommandGroup(after: .newItem) {
+                Button("New Task") {
                     NotificationCenter.default.post(name: .addNewItem, object: nil)
                 }
-                .keyboardShortcut("n", modifiers: [.command])
+                .keyboardShortcut("t", modifiers: [.command])
             }
         }
     }
