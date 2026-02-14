@@ -121,38 +121,6 @@ struct ItemStatsView: View {
     }
 }
 
-// Extension to make tag parsing accessible
-extension XitParser {
-    static func parseTags(_ text: String) -> [XitTag] {
-        var tags: [XitTag] = []
-        let tagPattern = #"#([a-zA-Z0-9_-]+)(?:=(?:"([^"]+)"|'([^']+)'|([a-zA-Z0-9_-]+)))?"#
-        
-        guard let regex = try? NSRegularExpression(pattern: tagPattern, options: []) else {
-            return tags
-        }
-        
-        let range = NSRange(text.startIndex..., in: text)
-        let matches = regex.matches(in: text, options: [], range: range)
-        
-        for match in matches {
-            guard let nameRange = Range(match.range(at: 1), in: text) else { continue }
-            let name = String(text[nameRange])
-            
-            var value: String?
-            for groupIndex in [2, 3, 4] {
-                if let valueRange = Range(match.range(at: groupIndex), in: text) {
-                    value = String(text[valueRange])
-                    break
-                }
-            }
-            
-            tags.append(XitTag(name: name, value: value))
-        }
-        
-        return tags
-    }
-}
-
 #Preview {
     ItemListView(
         group: .constant(XitGroup(title: "Test", items: [

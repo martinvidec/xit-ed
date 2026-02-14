@@ -141,7 +141,7 @@ struct XitParser {
     }
     
     /// Parse tags from a description string
-    private static func parseTags(_ text: String) -> [XitTag] {
+    static func parseTags(_ text: String) -> [XitTag] {
         var tags: [XitTag] = []
         
         guard let regex = try? NSRegularExpression(pattern: tagPattern, options: []) else {
