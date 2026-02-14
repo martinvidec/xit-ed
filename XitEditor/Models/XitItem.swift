@@ -151,7 +151,12 @@ struct XitItem: Identifiable, Equatable {
     }
     
     static func == (lhs: XitItem, rhs: XitItem) -> Bool {
-        lhs.id == rhs.id
+        lhs.id == rhs.id &&
+        lhs.status == rhs.status &&
+        lhs.priority == rhs.priority &&
+        lhs.description == rhs.description &&
+        lhs.continuationLines == rhs.continuationLines &&
+        lhs.dueDate == rhs.dueDate
     }
 }
 
@@ -177,7 +182,9 @@ struct XitGroup: Identifiable, Equatable {
     }
     
     static func == (lhs: XitGroup, rhs: XitGroup) -> Bool {
-        lhs.id == rhs.id
+        lhs.id == rhs.id &&
+        lhs.title == rhs.title &&
+        lhs.items == rhs.items
     }
 }
 
@@ -191,6 +198,6 @@ struct XitDocument: Equatable {
     }
     
     static func == (lhs: XitDocument, rhs: XitDocument) -> Bool {
-        lhs.groups.map { $0.id } == rhs.groups.map { $0.id }
+        lhs.groups == rhs.groups
     }
 }
