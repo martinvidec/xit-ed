@@ -102,10 +102,6 @@ struct GroupRow: View {
                 .textFieldStyle(.plain)
             } else {
                 Text(group.title ?? "Untitled")
-                    .onTapGesture(count: 2) {
-                        editedTitle = group.title ?? ""
-                        isEditing = true
-                    }
             }
             
             Spacer()
@@ -118,6 +114,13 @@ struct GroupRow: View {
                 .background(Color.secondary.opacity(0.2))
                 .clipShape(Capsule())
         }
+        .contentShape(Rectangle())
+        .gesture(
+            TapGesture(count: 2).onEnded {
+                editedTitle = group.title ?? ""
+                isEditing = true
+            }
+        )
     }
 }
 
