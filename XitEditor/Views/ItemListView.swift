@@ -130,6 +130,8 @@ struct ItemStatsView: View {
     var openCount: Int { items.filter { $0.status == .open }.count }
     var checkedCount: Int { items.filter { $0.status == .checked }.count }
     var ongoingCount: Int { items.filter { $0.status == .ongoing }.count }
+    var obsoleteCount: Int { items.filter { $0.status == .obsolete }.count }
+    var inQuestionCount: Int { items.filter { $0.status == .inQuestion }.count }
     
     var body: some View {
         HStack(spacing: 12) {
@@ -143,10 +145,20 @@ struct ItemStatsView: View {
                     .font(.caption)
                     .foregroundColor(.orange)
             }
+            if inQuestionCount > 0 {
+                Label("\(inQuestionCount)", systemImage: "questionmark.circle.fill")
+                    .font(.caption)
+                    .foregroundColor(.purple)
+            }
             if checkedCount > 0 {
                 Label("\(checkedCount)", systemImage: "checkmark.circle.fill")
                     .font(.caption)
                     .foregroundColor(.green)
+            }
+            if obsoleteCount > 0 {
+                Label("\(obsoleteCount)", systemImage: "minus.circle.fill")
+                    .font(.caption)
+                    .foregroundColor(.gray)
             }
         }
     }
