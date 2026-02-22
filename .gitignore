@@ -25,3 +25,12 @@ build/
 .build/
 .swiftpm/
 Package.resolved
+
+# Secrets
+.env
+.env.*
+*.pem
+*.p12
+*.key
+secrets/
+credentials.json
