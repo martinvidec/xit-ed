@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001 /* XitEditorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101; };
-		002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102; };
-		003 /* XitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103; };
-		004 /* XitParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104; };
-		005 /* XitFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105; };
-		006 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106; };
-		007 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107; };
-		008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 201; };
+		001 /* XitEditorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101 /* XitEditorApp.swift */; };
+		002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102 /* ContentView.swift */; };
+		003 /* XitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103 /* XitItem.swift */; };
+		004 /* XitParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104 /* XitParser.swift */; };
+		005 /* XitFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105 /* XitFileDocument.swift */; };
+		006 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106 /* ItemListView.swift */; };
+		007 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107 /* ItemRow.swift */; };
+		008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 201 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +26,7 @@
 		106 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		107 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 		201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		301 /* XitEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XitEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		301 /* xit!ed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xit!ed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		501 /* XitEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XitEditor.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 		G06 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				301 /* XitEditor.app */,
+				301 /* xit!ed.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,7 +124,7 @@
 			);
 			name = XitEditor;
 			productName = XitEditor;
-			productReference = 301 /* XitEditor.app */;
+			productReference = 301 /* xit!ed.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -260,7 +260,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "at.martinvidec.xit-editor";
+				PRODUCT_BUNDLE_IDENTIFIER = "at.videc.xit-editor";
 				PRODUCT_NAME = "xit!ed";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -287,7 +287,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "at.martinvidec.xit-editor";
+				PRODUCT_BUNDLE_IDENTIFIER = "at.videc.xit-editor";
 				PRODUCT_NAME = "xit!ed";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
