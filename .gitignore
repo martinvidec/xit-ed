@@ -13,6 +13,7 @@ build/
 *.ipa
 *.dSYM.zip
 *.dSYM
+*.xcarchive
 
 # macOS
 .DS_Store
