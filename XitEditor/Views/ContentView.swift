@@ -4,15 +4,39 @@ struct ContentView: View {
     @Binding var document: XitFileDocument
     @State private var selectedGroupId: UUID?
     @State private var selectedItemId: UUID?
-    @State private var isEditing = false
-    
+    @State private var editingGroupId: UUID?
+
     var body: some View {
         NavigationSplitView {
             // Sidebar: Groups
-            List(selection: $selectedGroupId) {
-                ForEach($document.document.groups) { $group in
-                    GroupRow(group: $group)
-                        .tag(group.id)
+            List {
+                ForEach(document.document.groups) { group in
+                    GroupRow(
+                        group: group,
+                        isSelected: selectedGroupId == group.id,
+                        isEditing: editingGroupId == group.id,
+                        onSelect: {
+                            selectedGroupId = group.id
+                        },
+                        onTitleChange: { newTitle in
+                            if let index = document.document.groups.firstIndex(where: { $0.id == group.id }) {
+                                document.document.groups[index].title = newTitle.isEmpty ? nil : newTitle
+                            }
+                            editingGroupId = nil
+                        },
+                        onCancelEdit: {
+                            editingGroupId = nil
+                        }
+                    )
+                    .contextMenu {
+                        Button("Rename") {
+                            editingGroupId = group.id
+                        }
+                        Divider()
+                        Button("Delete", role: .destructive) {
+                            deleteGroup(group)
+                        }
+                    }
                 }
             }
             .listStyle(.sidebar)
@@ -54,15 +78,8 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .addNewItem)) { _ in
             addItemToCurrentGroup()
         }
-        .onAppear {
+        .task(id: document.document.groups.isEmpty) {
             if selectedGroupId == nil, let firstGroup = document.document.groups.first {
-                selectedGroupId = firstGroup.id
-            }
-        }
-        .onChange(of: document.document.groups) { newGroups in
-            if let currentId = selectedGroupId,
-               !newGroups.contains(where: { $0.id == currentId }),
-               let firstGroup = newGroups.first {
                 selectedGroupId = firstGroup.id
             }
         }
@@ -72,6 +89,17 @@ struct ContentView: View {
         let newGroup = XitGroup(title: "New Group", items: [])
         document.document.groups.append(newGroup)
         selectedGroupId = newGroup.id
+    }
+
+    private func deleteGroup(_ group: XitGroup) {
+        let needsNewSelection = selectedGroupId == group.id
+        let newSelection = document.document.groups.first { $0.id != group.id }?.id
+
+        document.document.groups.removeAll { $0.id == group.id }
+
+        if needsNewSelection {
+            selectedGroupId = newSelection
+        }
     }
     
     private func addItemToCurrentGroup() {
@@ -93,42 +121,62 @@ struct ContentView: View {
 }
 
 struct GroupRow: View {
-    @Binding var group: XitGroup
-    @State private var isEditing = false
+    let group: XitGroup
+    let isSelected: Bool
+    let isEditing: Bool
+    let onSelect: () -> Void
+    let onTitleChange: (String) -> Void
+    let onCancelEdit: () -> Void
+
     @State private var editedTitle = ""
-    
+    @FocusState private var isFocused: Bool
+
     var body: some View {
         HStack {
             Image(systemName: "folder")
-                .foregroundColor(.secondary)
-            
+                .foregroundColor(isSelected ? .white : .secondary)
+
             if isEditing {
-                TextField("Group Title", text: $editedTitle, onCommit: {
-                    group.title = editedTitle.isEmpty ? nil : editedTitle
-                    isEditing = false
-                })
-                .textFieldStyle(.plain)
+                TextField("Group Title", text: $editedTitle)
+                    .textFieldStyle(.plain)
+                    .focused($isFocused)
+                    .onSubmit {
+                        onTitleChange(editedTitle)
+                    }
+                    .onExitCommand {
+                        onCancelEdit()
+                    }
             } else {
                 Text(group.title ?? "Untitled")
+                    .foregroundColor(isSelected ? .white : .primary)
             }
-            
+
             Spacer()
-            
+
             Text("\(group.items.count)")
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundColor(isSelected ? .white.opacity(0.8) : .secondary)
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
-                .background(Color.secondary.opacity(0.2))
+                .background(isSelected ? Color.white.opacity(0.2) : Color.secondary.opacity(0.2))
                 .clipShape(Capsule())
         }
+        .padding(.vertical, 4)
+        .padding(.horizontal, 8)
+        .background(isSelected ? Color.accentColor : Color.clear)
+        .cornerRadius(6)
         .contentShape(Rectangle())
-        .gesture(
-            TapGesture(count: 2).onEnded {
+        .onTapGesture {
+            onSelect()
+        }
+        .onChange(of: isEditing) { editing in
+            if editing {
                 editedTitle = group.title ?? ""
-                isEditing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    isFocused = true
+                }
             }
-        )
+        }
     }
 }
 
