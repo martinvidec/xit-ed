@@ -7,7 +7,6 @@ struct XitEditorApp: App {
             ContentView(document: file.$document)
         }
         .commands {
-            CommandGroup(replacing: .newItem) { }
             CommandGroup(after: .newItem) {
                 Button("New Task") {
                     NotificationCenter.default.post(name: .addNewItem, object: nil)
