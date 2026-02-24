@@ -3,9 +3,9 @@ import SwiftUI
 struct ItemListView: View {
     @Binding var group: XitGroup
     @Binding var selectedItemId: UUID?
+    @Binding var editingItemId: UUID?
     @State private var newItemText = ""
     @State private var statusFilter: XitStatus? = nil
-    @State private var editingItemId: UUID? = nil
     @FocusState private var isAddingItem: Bool
 
     private var filteredItemIndices: [Int] {
@@ -56,7 +56,6 @@ struct ItemListView: View {
                             selectedItemId = item.id
                             editingItemId = item.id
                         }
-                        .keyboardShortcut(.return, modifiers: [])
                         Divider()
                         Menu("Set Status") {
                             ForEach(XitStatus.allCases, id: \.self) { status in
@@ -90,17 +89,6 @@ struct ItemListView: View {
             }
             .listStyle(.inset)
         }
-        .background(
-            // Hidden button to capture Enter key for editing
-            Button("") {
-                if let selectedId = selectedItemId, editingItemId == nil {
-                    editingItemId = selectedId
-                }
-            }
-            .keyboardShortcut(.return, modifiers: [])
-            .opacity(0)
-            .frame(width: 0, height: 0)
-        )
         .onChange(of: group.id) { _ in
             // Reset editing state when switching groups
             editingItemId = nil
@@ -221,6 +209,7 @@ struct ItemStatsView: View {
         group: .constant(XitGroup(title: "Test", items: [
             XitItem(status: .open, priority: 1, description: "Test item #work", continuationLines: [], tags: [], dueDate: nil)
         ])),
-        selectedItemId: .constant(nil)
+        selectedItemId: .constant(nil),
+        editingItemId: .constant(nil)
     )
 }

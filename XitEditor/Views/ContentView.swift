@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var selectedGroupId: UUID?
     @State private var selectedItemId: UUID?
     @State private var editingGroupId: UUID?
+    @State private var editingItemId: UUID?
 
     var body: some View {
         NavigationSplitView {
@@ -53,7 +54,8 @@ struct ContentView: View {
             if let groupIndex = document.document.groups.firstIndex(where: { $0.id == selectedGroupId }) {
                 ItemListView(
                     group: $document.document.groups[groupIndex],
-                    selectedItemId: $selectedItemId
+                    selectedItemId: $selectedItemId,
+                    editingItemId: $editingItemId
                 )
             } else if !document.document.groups.isEmpty {
                 // Placeholder while onAppear sets the selection
@@ -83,6 +85,28 @@ struct ContentView: View {
                 selectedGroupId = firstGroup.id
             }
         }
+        .onChange(of: selectedGroupId) { _ in
+            // Cancel group editing when selecting different group
+            editingGroupId = nil
+            // Clear item selection when switching groups
+            selectedItemId = nil
+            editingItemId = nil
+        }
+        .background(
+            // Central Enter key handler
+            Button("") {
+                if let selectedId = selectedItemId, editingItemId == nil {
+                    // Item selected: edit item
+                    editingItemId = selectedId
+                } else if selectedItemId == nil, let selectedId = selectedGroupId, editingGroupId == nil {
+                    // No item selected: rename group
+                    editingGroupId = selectedId
+                }
+            }
+            .keyboardShortcut(.return, modifiers: [])
+            .opacity(0)
+            .frame(width: 0, height: 0)
+        )
     }
     
     private func addGroup() {
