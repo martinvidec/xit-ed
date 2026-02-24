@@ -6,6 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 xit!ed is a native macOS SwiftUI application for editing [x]it! plain-text todo files. The [x]it! format specification is at https://xit.jotaen.net/.
 
+## Git Workflow
+
+- Create a **feature branch** for each change (e.g., `fix/sidebar-selection`)
+- Commit with descriptive messages
+- Push and create a **Pull Request**
+- Merge PR after review/approval
+- Delete branch after merge
+
 ## Build Commands
 
 Open `XitEditor.xcodeproj` in Xcode and build with ⌘B. Requires macOS 13.0+ and Xcode 15.0+.
