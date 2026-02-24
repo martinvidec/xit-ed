@@ -10,38 +10,48 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             // Sidebar: Groups
-            List {
-                ForEach(document.document.groups) { group in
-                    GroupRow(
-                        group: group,
-                        isSelected: selectedGroupId == group.id,
-                        isEditing: editingGroupId == group.id,
-                        onSelect: {
-                            selectedGroupId = group.id
-                        },
-                        onTitleChange: { newTitle in
-                            if let index = document.document.groups.firstIndex(where: { $0.id == group.id }) {
-                                document.document.groups[index].title = newTitle.isEmpty ? nil : newTitle
+            ScrollViewReader { proxy in
+                List {
+                    ForEach(document.document.groups) { group in
+                        GroupRow(
+                            group: group,
+                            isSelected: selectedGroupId == group.id,
+                            isEditing: editingGroupId == group.id,
+                            onSelect: {
+                                selectedGroupId = group.id
+                            },
+                            onTitleChange: { newTitle in
+                                if let index = document.document.groups.firstIndex(where: { $0.id == group.id }) {
+                                    document.document.groups[index].title = newTitle.isEmpty ? nil : newTitle
+                                }
+                                editingGroupId = nil
+                            },
+                            onCancelEdit: {
+                                editingGroupId = nil
                             }
-                            editingGroupId = nil
-                        },
-                        onCancelEdit: {
-                            editingGroupId = nil
+                        )
+                        .id(group.id)
+                        .contextMenu {
+                            Button("Rename") {
+                                editingGroupId = group.id
+                            }
+                            Divider()
+                            Button("Delete", role: .destructive) {
+                                deleteGroup(group)
+                            }
                         }
-                    )
-                    .contextMenu {
-                        Button("Rename") {
-                            editingGroupId = group.id
-                        }
-                        Divider()
-                        Button("Delete", role: .destructive) {
-                            deleteGroup(group)
+                    }
+                }
+                .listStyle(.sidebar)
+                .frame(minWidth: 200)
+                .onChange(of: selectedGroupId) { newId in
+                    if let id = newId {
+                        withAnimation {
+                            proxy.scrollTo(id, anchor: .center)
                         }
                     }
                 }
             }
-            .listStyle(.sidebar)
-            .frame(minWidth: 200)
             .toolbar {
                 ToolbarItem {
                     Button(action: addGroup) {
@@ -93,20 +103,45 @@ struct ContentView: View {
             editingItemId = nil
         }
         .background(
-            // Central Enter key handler
-            Button("") {
-                if let selectedId = selectedItemId, editingItemId == nil {
-                    // Item selected: edit item
-                    editingItemId = selectedId
-                } else if selectedItemId == nil, let selectedId = selectedGroupId, editingGroupId == nil {
-                    // No item selected: rename group
-                    editingGroupId = selectedId
+            Group {
+                // Central Enter key handler
+                Button("") {
+                    if let selectedId = selectedItemId, editingItemId == nil {
+                        editingItemId = selectedId
+                    } else if selectedItemId == nil, let selectedId = selectedGroupId, editingGroupId == nil {
+                        editingGroupId = selectedId
+                    }
                 }
+                .keyboardShortcut(.return, modifiers: [])
+
+                // Arrow key navigation
+                Button("") { navigateUp() }
+                    .keyboardShortcut(.upArrow, modifiers: [])
+                Button("") { navigateDown() }
+                    .keyboardShortcut(.downArrow, modifiers: [])
+                Button("") { navigateLeft() }
+                    .keyboardShortcut(.leftArrow, modifiers: [])
+                Button("") { navigateRight() }
+                    .keyboardShortcut(.rightArrow, modifiers: [])
             }
-            .keyboardShortcut(.return, modifiers: [])
             .opacity(0)
             .frame(width: 0, height: 0)
         )
+        .onReceive(NotificationCenter.default.publisher(for: .setStatusOpen)) { _ in
+            setSelectedItemStatus(.open)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .setStatusChecked)) { _ in
+            setSelectedItemStatus(.checked)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .setStatusOngoing)) { _ in
+            setSelectedItemStatus(.ongoing)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .setStatusObsolete)) { _ in
+            setSelectedItemStatus(.obsolete)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .setStatusInQuestion)) { _ in
+            setSelectedItemStatus(.inQuestion)
+        }
     }
     
     private func addGroup() {
@@ -135,11 +170,88 @@ struct ContentView: View {
             tags: [],
             dueDate: nil
         )
-        
+
         if let groupIndex = document.document.groups.firstIndex(where: { $0.id == selectedGroupId }) {
             document.document.groups[groupIndex].items.append(newItem)
         } else if !document.document.groups.isEmpty {
             document.document.groups[0].items.append(newItem)
+        }
+    }
+
+    private func setSelectedItemStatus(_ status: XitStatus) {
+        // Don't change status while editing
+        guard editingItemId == nil, editingGroupId == nil else { return }
+        guard let itemId = selectedItemId else { return }
+        guard let groupIndex = document.document.groups.firstIndex(where: { $0.id == selectedGroupId }) else { return }
+        guard let itemIndex = document.document.groups[groupIndex].items.firstIndex(where: { $0.id == itemId }) else { return }
+
+        document.document.groups[groupIndex].items[itemIndex].status = status
+    }
+
+    // MARK: - Arrow Key Navigation
+
+    private func navigateUp() {
+        guard editingItemId == nil, editingGroupId == nil else { return }
+
+        if selectedItemId != nil {
+            // Navigate items
+            navigateItems(direction: -1)
+        } else {
+            // Navigate groups
+            navigateGroups(direction: -1)
+        }
+    }
+
+    private func navigateDown() {
+        guard editingItemId == nil, editingGroupId == nil else { return }
+
+        if selectedItemId != nil {
+            navigateItems(direction: 1)
+        } else {
+            navigateGroups(direction: 1)
+        }
+    }
+
+    private func navigateLeft() {
+        guard editingItemId == nil, editingGroupId == nil else { return }
+        // Switch to groups (clear item selection)
+        selectedItemId = nil
+    }
+
+    private func navigateRight() {
+        guard editingItemId == nil, editingGroupId == nil else { return }
+        // Switch to items (select first item if none selected)
+        if selectedItemId == nil,
+           let groupIndex = document.document.groups.firstIndex(where: { $0.id == selectedGroupId }),
+           let firstItem = document.document.groups[groupIndex].items.first {
+            selectedItemId = firstItem.id
+        }
+    }
+
+    private func navigateGroups(direction: Int) {
+        let groups = document.document.groups
+        guard !groups.isEmpty else { return }
+
+        if let currentId = selectedGroupId,
+           let currentIndex = groups.firstIndex(where: { $0.id == currentId }) {
+            let newIndex = max(0, min(groups.count - 1, currentIndex + direction))
+            selectedGroupId = groups[newIndex].id
+        } else {
+            selectedGroupId = groups.first?.id
+        }
+    }
+
+    private func navigateItems(direction: Int) {
+        guard let groupIndex = document.document.groups.firstIndex(where: { $0.id == selectedGroupId }) else { return }
+        let items = document.document.groups[groupIndex].items
+        guard !items.isEmpty else { return }
+
+        if let currentId = selectedItemId,
+           let currentIndex = items.firstIndex(where: { $0.id == currentId }) {
+            let newIndex = max(0, min(items.count - 1, currentIndex + direction))
+            selectedItemId = items[newIndex].id
+        } else {
+            selectedItemId = items.first?.id
         }
     }
 }

@@ -34,60 +34,70 @@ struct ItemListView: View {
             Divider()
 
             // Item list
-            List {
-                ForEach(filteredItemIndices, id: \.self) { index in
-                    let item = group.items[index]
-                    ItemRow(
-                        item: $group.items[index],
-                        isSelected: selectedItemId == item.id,
-                        isEditing: editingItemId == item.id,
-                        onSelect: {
-                            selectedItemId = item.id
-                        },
-                        onStartEdit: {
-                            editingItemId = item.id
-                        },
-                        onEndEdit: {
-                            editingItemId = nil
-                        }
-                    )
-                    .contextMenu {
-                        Button("Edit") {
-                            selectedItemId = item.id
-                            editingItemId = item.id
-                        }
-                        Divider()
-                        Menu("Set Status") {
-                            ForEach(XitStatus.allCases, id: \.self) { status in
-                                Button(status.displayName) {
-                                    group.items[index].status = status
+            ScrollViewReader { proxy in
+                List {
+                    ForEach(filteredItemIndices, id: \.self) { index in
+                        let item = group.items[index]
+                        ItemRow(
+                            item: $group.items[index],
+                            isSelected: selectedItemId == item.id,
+                            isEditing: editingItemId == item.id,
+                            onSelect: {
+                                selectedItemId = item.id
+                            },
+                            onStartEdit: {
+                                editingItemId = item.id
+                            },
+                            onEndEdit: {
+                                editingItemId = nil
+                            }
+                        )
+                        .id(item.id)
+                        .contextMenu {
+                            Button("Edit") {
+                                selectedItemId = item.id
+                                editingItemId = item.id
+                            }
+                            Divider()
+                            Menu("Set Status") {
+                                ForEach(XitStatus.allCases, id: \.self) { status in
+                                    Button(status.displayName) {
+                                        group.items[index].status = status
+                                    }
                                 }
                             }
+                            Divider()
+                            Button("Delete", role: .destructive) {
+                                group.items.remove(at: index)
+                            }
                         }
-                        Divider()
-                        Button("Delete", role: .destructive) {
-                            group.items.remove(at: index)
+                    }
+                    .onDelete(perform: deleteFilteredItems)
+                    .onMove(perform: statusFilter == nil ? moveItems : nil)
+
+                    // Quick add field
+                    HStack(spacing: 12) {
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.secondary)
+
+                        TextField("Add new item...", text: $newItemText)
+                            .textFieldStyle(.plain)
+                            .focused($isAddingItem)
+                            .onSubmit {
+                                addItem()
+                            }
+                    }
+                    .padding(.vertical, 4)
+                }
+                .listStyle(.inset)
+                .onChange(of: selectedItemId) { newId in
+                    if let id = newId {
+                        withAnimation {
+                            proxy.scrollTo(id, anchor: .center)
                         }
                     }
                 }
-                .onDelete(perform: deleteFilteredItems)
-                .onMove(perform: statusFilter == nil ? moveItems : nil)
-
-                // Quick add field
-                HStack(spacing: 12) {
-                    Image(systemName: "plus.circle")
-                        .foregroundColor(.secondary)
-
-                    TextField("Add new item...", text: $newItemText)
-                        .textFieldStyle(.plain)
-                        .focused($isAddingItem)
-                        .onSubmit {
-                            addItem()
-                        }
-                }
-                .padding(.vertical, 4)
             }
-            .listStyle(.inset)
         }
         .onChange(of: group.id) { _ in
             // Reset editing state when switching groups
