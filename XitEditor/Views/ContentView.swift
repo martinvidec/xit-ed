@@ -31,14 +31,10 @@ struct ContentView: View {
                     group: $document.document.groups[groupIndex],
                     selectedItemId: $selectedItemId
                 )
-            } else if let firstGroup = document.document.groups.first {
-                ItemListView(
-                    group: Binding(
-                        get: { document.document.groups[0] },
-                        set: { document.document.groups[0] = $0 }
-                    ),
-                    selectedItemId: $selectedItemId
-                )
+            } else if !document.document.groups.isEmpty {
+                // Placeholder while onAppear sets the selection
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 VStack(spacing: 16) {
                     Image(systemName: "folder")
@@ -57,6 +53,18 @@ struct ContentView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .addNewItem)) { _ in
             addItemToCurrentGroup()
+        }
+        .onAppear {
+            if selectedGroupId == nil, let firstGroup = document.document.groups.first {
+                selectedGroupId = firstGroup.id
+            }
+        }
+        .onChange(of: document.document.groups) { newGroups in
+            if let currentId = selectedGroupId,
+               !newGroups.contains(where: { $0.id == currentId }),
+               let firstGroup = newGroups.first {
+                selectedGroupId = firstGroup.id
+            }
         }
     }
     
