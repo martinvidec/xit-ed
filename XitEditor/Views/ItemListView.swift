@@ -5,15 +5,16 @@ struct ItemListView: View {
     @Binding var selectedItemId: UUID?
     @State private var newItemText = ""
     @State private var statusFilter: XitStatus? = nil
+    @State private var editingItemId: UUID? = nil
     @FocusState private var isAddingItem: Bool
-    
+
     private var filteredItemIndices: [Int] {
         group.items.indices.filter { index in
             guard let filter = statusFilter else { return true }
             return group.items[index].status == filter
         }
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             // Header
@@ -23,29 +24,61 @@ struct ItemListView: View {
                         .font(.title2)
                         .fontWeight(.semibold)
                     Spacer()
-                    
+
                     ItemStatsView(items: group.items)
                 }
                 .padding()
                 .background(Color(nsColor: .windowBackgroundColor))
             }
-            
+
             Divider()
-            
+
             // Item list
-            List(selection: $selectedItemId) {
+            List {
                 ForEach(filteredItemIndices, id: \.self) { index in
-                    ItemRow(item: $group.items[index])
-                        .tag(group.items[index].id)
+                    let item = group.items[index]
+                    ItemRow(
+                        item: $group.items[index],
+                        isSelected: selectedItemId == item.id,
+                        isEditing: editingItemId == item.id,
+                        onSelect: {
+                            selectedItemId = item.id
+                        },
+                        onStartEdit: {
+                            editingItemId = item.id
+                        },
+                        onEndEdit: {
+                            editingItemId = nil
+                        }
+                    )
+                    .contextMenu {
+                        Button("Edit") {
+                            selectedItemId = item.id
+                            editingItemId = item.id
+                        }
+                        .keyboardShortcut(.return, modifiers: [])
+                        Divider()
+                        Menu("Set Status") {
+                            ForEach(XitStatus.allCases, id: \.self) { status in
+                                Button(status.displayName) {
+                                    group.items[index].status = status
+                                }
+                            }
+                        }
+                        Divider()
+                        Button("Delete", role: .destructive) {
+                            group.items.remove(at: index)
+                        }
+                    }
                 }
                 .onDelete(perform: deleteFilteredItems)
                 .onMove(perform: statusFilter == nil ? moveItems : nil)
-                
+
                 // Quick add field
                 HStack(spacing: 12) {
                     Image(systemName: "plus.circle")
                         .foregroundColor(.secondary)
-                    
+
                     TextField("Add new item...", text: $newItemText)
                         .textFieldStyle(.plain)
                         .focused($isAddingItem)
@@ -56,6 +89,25 @@ struct ItemListView: View {
                 .padding(.vertical, 4)
             }
             .listStyle(.inset)
+        }
+        .background(
+            // Hidden button to capture Enter key for editing
+            Button("") {
+                if let selectedId = selectedItemId, editingItemId == nil {
+                    editingItemId = selectedId
+                }
+            }
+            .keyboardShortcut(.return, modifiers: [])
+            .opacity(0)
+            .frame(width: 0, height: 0)
+        )
+        .onChange(of: group.id) { _ in
+            // Reset editing state when switching groups
+            editingItemId = nil
+        }
+        .onChange(of: selectedItemId) { _ in
+            // Reset editing state when selecting different item
+            editingItemId = nil
         }
         .toolbar {
             ToolbarItemGroup {
