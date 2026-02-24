@@ -2,15 +2,21 @@ import SwiftUI
 
 struct ItemRow: View {
     @Binding var item: XitItem
-    @State private var isEditing = false
+    let isSelected: Bool
+    let isEditing: Bool
+    let onSelect: () -> Void
+    let onStartEdit: () -> Void
+    let onEndEdit: () -> Void
+
     @State private var editedDescription = ""
     @State private var isHovering = false
-    
+    @FocusState private var isTextFieldFocused: Bool
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             // Checkbox
             StatusButton(status: $item.status)
-            
+
             // Content
             VStack(alignment: .leading, spacing: 4) {
                 // Priority and Description
@@ -18,25 +24,26 @@ struct ItemRow: View {
                     if item.priority > 0 {
                         PriorityBadge(level: item.priority)
                     }
-                    
+
                     if isEditing {
-                        TextField("Description", text: $editedDescription, onCommit: {
-                            item.description = editedDescription
-                            isEditing = false
-                        })
-                        .textFieldStyle(.plain)
+                        TextField("Description", text: $editedDescription)
+                            .textFieldStyle(.plain)
+                            .focused($isTextFieldFocused)
+                            .onSubmit {
+                                item.description = editedDescription
+                                onEndEdit()
+                            }
+                            .onExitCommand {
+                                onEndEdit()
+                            }
                     } else {
                         DescriptionText(
                             text: item.description,
                             status: item.status
                         )
-                        .onTapGesture(count: 2) {
-                            editedDescription = item.description
-                            isEditing = true
-                        }
                     }
                 }
-                
+
                 // Continuation lines
                 if !item.continuationLines.isEmpty {
                     VStack(alignment: .leading, spacing: 2) {
@@ -48,14 +55,14 @@ struct ItemRow: View {
                     }
                     .padding(.leading, item.priority > 0 ? 30 : 0)
                 }
-                
+
                 // Tags and Due Date
                 if !item.tags.isEmpty || item.dueDate != nil {
                     HStack(spacing: 8) {
                         ForEach(item.tags) { tag in
                             TagBadge(tag: tag)
                         }
-                        
+
                         if let dueDate = item.dueDate {
                             DueDateBadge(dueDate: dueDate)
                         }
@@ -63,18 +70,32 @@ struct ItemRow: View {
                     .padding(.top, 2)
                 }
             }
-            
+
             Spacer()
-            
+
             // Status menu on hover
             if isHovering {
                 StatusMenu(status: $item.status)
             }
         }
         .padding(.vertical, 4)
+        .padding(.horizontal, 8)
+        .background(isSelected ? Color.accentColor.opacity(0.15) : Color.clear)
+        .cornerRadius(6)
         .contentShape(Rectangle())
+        .onTapGesture {
+            onSelect()
+        }
         .onHover { hovering in
             isHovering = hovering
+        }
+        .onChange(of: isEditing) { editing in
+            if editing {
+                editedDescription = item.description
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    isTextFieldFocused = true
+                }
+            }
         }
     }
 }
@@ -222,23 +243,37 @@ struct DueDateBadge: View {
 
 #Preview {
     VStack {
-        ItemRow(item: .constant(XitItem(
-            status: .open,
-            priority: 2,
-            description: "Important task #work #urgent -> 2024-03-15",
-            continuationLines: ["This is a continuation", "And another line"],
-            tags: [XitTag(name: "work", value: nil), XitTag(name: "urgent", value: nil)],
-            dueDate: nil
-        )))
-        
-        ItemRow(item: .constant(XitItem(
-            status: .checked,
-            priority: 0,
-            description: "Completed task",
-            continuationLines: [],
-            tags: [],
-            dueDate: nil
-        )))
+        ItemRow(
+            item: .constant(XitItem(
+                status: .open,
+                priority: 2,
+                description: "Important task #work #urgent -> 2024-03-15",
+                continuationLines: ["This is a continuation", "And another line"],
+                tags: [XitTag(name: "work", value: nil), XitTag(name: "urgent", value: nil)],
+                dueDate: nil
+            )),
+            isSelected: true,
+            isEditing: false,
+            onSelect: {},
+            onStartEdit: {},
+            onEndEdit: {}
+        )
+
+        ItemRow(
+            item: .constant(XitItem(
+                status: .checked,
+                priority: 0,
+                description: "Completed task",
+                continuationLines: [],
+                tags: [],
+                dueDate: nil
+            )),
+            isSelected: false,
+            isEditing: false,
+            onSelect: {},
+            onStartEdit: {},
+            onEndEdit: {}
+        )
     }
     .padding()
 }
