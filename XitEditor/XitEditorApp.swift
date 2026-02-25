@@ -19,7 +19,7 @@ struct XitEditorApp: App {
                     Button("Open [ ]") {
                         NotificationCenter.default.post(name: .setStatusOpen, object: nil)
                     }
-                    .keyboardShortcut(.space, modifiers: [])
+                    .keyboardShortcut(.space, modifiers: [.option])
 
                     Button("Checked [x]") {
                         NotificationCenter.default.post(name: .setStatusChecked, object: nil)

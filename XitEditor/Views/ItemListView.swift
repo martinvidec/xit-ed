@@ -103,9 +103,11 @@ struct ItemListView: View {
             // Reset editing state when switching groups
             editingItemId = nil
         }
-        .onChange(of: selectedItemId) { _ in
-            // Reset editing state when selecting different item
-            editingItemId = nil
+        .onChange(of: selectedItemId) { newId in
+            // Reset editing state when selecting a different item
+            if editingItemId != nil && editingItemId != newId {
+                editingItemId = nil
+            }
         }
         .toolbar {
             ToolbarItemGroup {

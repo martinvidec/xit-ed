@@ -104,25 +104,28 @@ struct ContentView: View {
         }
         .background(
             Group {
-                // Central Enter key handler
-                Button("") {
-                    if let selectedId = selectedItemId, editingItemId == nil {
-                        editingItemId = selectedId
-                    } else if selectedItemId == nil, let selectedId = selectedGroupId, editingGroupId == nil {
-                        editingGroupId = selectedId
+                // Only enable navigation shortcuts when not editing
+                if editingItemId == nil && editingGroupId == nil {
+                    // Central Enter key handler
+                    Button("") {
+                        if let selectedId = selectedItemId {
+                            editingItemId = selectedId
+                        } else if let selectedId = selectedGroupId {
+                            editingGroupId = selectedId
+                        }
                     }
-                }
-                .keyboardShortcut(.return, modifiers: [])
+                    .keyboardShortcut(.return, modifiers: [])
 
-                // Arrow key navigation
-                Button("") { navigateUp() }
-                    .keyboardShortcut(.upArrow, modifiers: [])
-                Button("") { navigateDown() }
-                    .keyboardShortcut(.downArrow, modifiers: [])
-                Button("") { navigateLeft() }
-                    .keyboardShortcut(.leftArrow, modifiers: [])
-                Button("") { navigateRight() }
-                    .keyboardShortcut(.rightArrow, modifiers: [])
+                    // Arrow key navigation
+                    Button("") { navigateUp() }
+                        .keyboardShortcut(.upArrow, modifiers: [])
+                    Button("") { navigateDown() }
+                        .keyboardShortcut(.downArrow, modifiers: [])
+                    Button("") { navigateLeft() }
+                        .keyboardShortcut(.leftArrow, modifiers: [])
+                    Button("") { navigateRight() }
+                        .keyboardShortcut(.rightArrow, modifiers: [])
+                }
             }
             .opacity(0)
             .frame(width: 0, height: 0)
