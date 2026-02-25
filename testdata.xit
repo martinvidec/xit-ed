@@ -1,0 +1,430 @@
+Inbox
+[ ] Zahnarzttermin ausmachen, der letzte ist schon ewig her
+    Vielleicht Dr. Müller fragen ob er noch Termine frei hat
+    Alternativ die neue Praxis in der Hauptstraße probieren
+[x] Reisepass verlängern lassen -> 2026-04-15
+    Brauche noch ein biometrisches Foto
+    Termin beim Bürgeramt online buchen
+[x] Paket bei der Post abholen #erledigt
+[@] Steuererklärung 2025 vorbereiten #finanzen -> 2026-05-31
+    Belege sortieren
+    Fahrtkosten zusammenrechnen
+    Homeoffice-Pauschale nicht vergessen
+[ ] ! Geschenk für Mamas Geburtstag besorgen -> 2026-03-12
+    Sie hat letztens von dem Buch erzählt
+    Oder vielleicht doch der Schal den sie im Schaufenster gesehen hat?
+[~] Alte Zeitschriften zum Altpapier bringen
+[?] Fitnessstudio-Mitgliedschaft kündigen oder verlängern?
+    Eigentlich gehe ich zu selten hin
+    Aber der Vorsatz für dieses Jahr war mehr Sport...
+
+Arbeit - Projekt Phoenix
+[ ] !! API-Dokumentation aktualisieren #backend #docs -> 2026-03-01
+    Neue Endpoints für v2.3 dokumentieren
+    Beispiel-Requests hinzufügen
+    Authentifizierung besser erklären
+[ ] Code Review für PR #4521 machen #review #backend
+        Maria hat das gestern submitted
+        Geht um die neue Caching-Logik
+[x] Deployment-Pipeline für Staging fixen #devops #urgent
+    War ein Problem mit den Environment-Variablen
+[x] Sprint Planning Meeting vorbereiten #meeting
+[ ] Performance-Tests für den neuen Search-Endpoint #backend #testing -> 2026-03-05
+    Mindestens 1000 concurrent requests testen
+    Response times unter 200ms halten
+    Memory-Verbrauch monitoren
+[ ] ! Onboarding-Dokument für neue Teammitglieder schreiben #docs #team
+    Setup-Anleitung für lokale Entwicklung
+    Übersicht über die Architektur
+    Wichtige Slack-Channels und Kontakte
+[?] Sollen wir auf die neue Node.js Version upgraden? #backend #discussion
+    LTS ist jetzt 22.x
+    Müssten erst alle Dependencies checken
+[@] Bug in der Session-Verwaltung analysieren #backend #bug -> 2026-02-28
+    Tritt nur bei bestimmten Timezone-Einstellungen auf
+    Logs von letzter Woche durchgehen
+[~] Alten Feature-Flag-Code entfernen #cleanup
+    Feature ist seit 3 Monaten live
+    Niemand hat sich beschwert
+
+Arbeit - Meetings & Kommunikation
+[x] 1:1 mit Sarah vorbereiten #meeting #team
+    Feedback zu ihrem letzten Projekt geben
+    Weiterbildungswünsche besprechen
+[ ] Quarterly Review Präsentation erstellen #presentation -> 2026-03-15
+    Metriken aus dem Dashboard exportieren
+    Highlights und Lowlights zusammenfassen
+    Nächste Quartalsziele definieren
+[@] Slack-Channel aufräumen #admin
+    Alte Channels archivieren
+    Channel-Beschreibungen aktualisieren
+[ ] Feedback zu Toms Architektur-Proposal geben #review -> 2026-02-27
+    Besonders die Skalierbarkeits-Aspekte anschauen
+    Fragen zur Datenmigration notieren
+[x] Reisekosten für Konferenz einreichen #admin #finanzen
+    Hotel, Flug und Verpflegung
+[?] Sollten wir einen Team-Offsite organisieren? #team #discussion
+    Budget müsste geklärt werden
+    Terminvorschläge sammeln
+
+Einkaufsliste
+[ ] Milch #einkauf
+[ ] Brot (das Vollkorn vom Bäcker) #einkauf
+[ ] Kaffee - die Sorte mit dem blauen Etikett #einkauf
+[x] Toilettenpapier #einkauf
+[ ] Olivenöl #einkauf
+[ ] Zwiebeln und Knoblauch #einkauf
+[ ] ! Batterien für die Fernbedienung #einkauf #dringend
+[x] Waschmittel #einkauf
+[ ] Neue Zahnbürste #einkauf #drogerie
+[ ] Shampoo (das ohne Silikone) #einkauf #drogerie
+[~] Chips für den Filmabend #einkauf
+    Filmabend wurde abgesagt
+
+Haushalt
+[ ] Fenster putzen #haushalt -> 2026-03-01
+    Zumindest die im Wohnzimmer
+    Außenseite nur wenn das Wetter mitspielt
+[@] Kleiderschrank ausmisten #haushalt #declutter
+    Alles was ich seit einem Jahr nicht getragen habe
+    Gute Stücke zu Oxfam bringen
+    Rest in den Altkleider-Container
+[x] Waschmaschine entkalken #haushalt
+[ ] Balkonpflanzen umtopfen #haushalt #garten -> 2026-04
+    Größere Töpfe kaufen
+    Neue Erde besorgen
+[?] Neuen Staubsauger kaufen? #haushalt #anschaffung
+    Der alte macht komische Geräusche
+    Aber vielleicht reicht auch ein neuer Filter
+[ ] ! Rauchmelder-Batterien wechseln #haushalt #sicherheit
+    Im Flur und in der Küche
+    Waren schon 2x falsche Alarme
+[x] Kühlschrank abtauen #haushalt
+    War höchste Zeit
+[~] Vorhänge waschen #haushalt
+    Haben wir auf nächsten Monat verschoben
+
+Gesundheit & Fitness
+[ ] Impfpass digitalisieren #gesundheit #digital
+    CovPass-App ist veraltet
+    Neue Lösung recherchieren
+[@] 10.000 Schritte pro Tag schaffen #fitness #habit
+    Aktuell bei durchschnittlich 7.500
+    Vielleicht Lunch-Walks einführen
+[ ] Termin bei der Hautärztin machen #gesundheit -> 2026-04
+    Jährliche Vorsorge
+    Wartezeit ist bestimmt lang
+[x] Neue Laufschuhe einlaufen #fitness
+    Die ersten 5km waren etwas unbequem
+    Jetzt passt alles
+[ ] ! Brillengläser erneuern lassen #gesundheit -> 2026-03-10
+    Kratzer stören beim Arbeiten
+    Stärke nochmal prüfen lassen
+[?] Yoga-Kurs oder lieber Online-Videos? #fitness #decision
+    Kurs wäre strukturierter
+    Videos sind flexibler
+[ ] Schlaftracker-Daten auswerten #gesundheit #tracking
+    Letzten Monat analysieren
+    Muster erkennen
+
+Finanzen
+[ ] !! Kontoauszüge für Steuerberater vorbereiten #finanzen -> 2026-03-15
+    Alle 12 Monate als PDF
+    Kategorisierung der Ausgaben
+[@] Budget für Q2 planen #finanzen #planning
+    Fixkosten durchgehen
+    Sparziel festlegen
+    Urlaubsbudget berücksichtigen
+[x] Stromrechnung bezahlt #finanzen
+[x] Kfz-Versicherung überwiesen #finanzen
+[ ] Depot-Rebalancing durchführen #finanzen #investment -> 2026-04-01
+    Aktienquote ist zu hoch geworden
+    Anleihen-ETF nachkaufen
+[?] Tagesgeldkonto wechseln? #finanzen #decision
+    Zinsen bei der Konkurrenz besser
+    Aber der Aufwand...
+[~] Kreditkartenabrechnung prüfen #finanzen
+    Sieht alles korrekt aus
+[ ] Nebenkostenabrechnung kontrollieren #finanzen -> 2026-03-20
+    Liegt seit einer Woche auf dem Stapel
+    Vergleich mit Vorjahr machen
+
+Lernen & Weiterbildung
+[@] Rust-Tutorial durcharbeiten #learning #programming -> 2026-05
+    Kapitel 1-5 sind fertig
+    Ownership-Konzept nochmal üben
+    Erstes eigenes Projekt starten
+[ ] Buch "Designing Data-Intensive Applications" weiterlesen #learning #reading
+    Bin bei Kapitel 7
+    Notizen machen nicht vergessen
+[x] Kubernetes-Zertifizierung bestanden #learning #career
+    CKA endlich geschafft!
+[ ] Spanisch-Vokabeln üben #learning #language
+    Mindestens 15 Minuten täglich
+    Duolingo-Streak halten
+[ ] ! Vortrag für Meetup vorbereiten #learning #presentation -> 2026-03-20
+    Thema: Event Sourcing in der Praxis
+    Slides erstellen
+    Demo-Projekt aufsetzen
+    Mindestens einmal üben
+[?] Data Science Kurs anfangen? #learning #decision
+    Interessiert mich schon lange
+    Aber wo die Zeit hernehmen
+
+Soziales & Familie
+[ ] Mit Opa telefonieren #familie
+    Schon zwei Wochen nicht mehr gesprochen
+    Nach seinem Arzttermin fragen
+[x] Geburtstagsgeschenk für Nichte verschickt #familie
+    Das Lego-Set kam gut an
+[@] Grillparty im Sommer planen #soziales #event -> 2026-07
+    Datum finden das allen passt
+    Location: Garten oder Park?
+    Getränke-Kalkulation
+[ ] Alte Freunde zum Spieleabend einladen #soziales -> 2026-03
+    Doodle-Umfrage erstellen
+    Snacks organisieren
+[~] Klassentreffen organisieren #soziales
+    Niemand hat auf die Anfrage reagiert
+    Vielleicht nächstes Jahr nochmal probieren
+[ ] Danke-Karte an die Nachbarn schreiben #soziales
+    Haben die Pakete angenommen während ich weg war
+    Vielleicht mit einer Flasche Wein
+
+Wohnung & Renovierung
+[ ] !! Wasserhahn im Bad reparieren lassen #wohnung #reparatur -> 2026-02-28
+    Tropft seit Tagen
+    Klempner anrufen
+    Vermieter informieren?
+[@] Wohnzimmer neu streichen #wohnung #projekt
+    Farbton aussuchen (warm-weiß oder hellgrau?)
+    Möbel abdecken
+    Malerkrepp besorgen
+[ ] Neue Regale für Arbeitszimmer #wohnung #möbel
+            Billy von IKEA oder was Hochwertigeres?
+            Maße ausmessen
+[x] LED-Lampen installiert #wohnung
+    Viel besser als die alten Glühbirnen
+[?] Balkon-Sichtschutz kaufen? #wohnung #decision
+    Nachbar starrt manchmal rüber
+    Aber weniger Licht wäre auch doof
+
+Reisen & Urlaub
+[ ] ! Flüge für Sommerurlaub buchen #reise #urlaub -> 2026-03-15
+    Portugal sieht gut aus
+    Preise vergleichen
+    Flexible Tickets wegen möglicher Planänderungen
+[@] Reiseführer für Lissabon lesen #reise #vorbereitung
+    Besonders das Kapitel über Restaurants
+    Tagesausflüge nach Sintra planen
+[ ] Packliste erstellen #reise #organisation
+    Adapter für Steckdosen?
+    Sonnencreme mit hohem LSF
+[x] Reiseversicherung abgeschlossen #reise
+[ ] Unterkunft für Berlin-Trip buchen #reise -> 2026-04-10
+    Konferenz ist vom 15.-17. April
+    Hotel in der Nähe vom Venue
+    Frühstück inklusive wäre nice
+
+Auto
+[ ] TÜV-Termin machen #auto -> 2026-06
+    Läuft im Juli ab
+    Vorher noch den Kratzer am Kotflügel ausbessern?
+[@] Winterreifen einlagern lassen #auto #saison
+    Termin bei der Werkstatt machen
+    Oder selbst im Keller lagern
+[x] Ölstand geprüft #auto
+[ ] Auto waschen #auto
+    Innen und außen
+    Kofferraum mal richtig aussaugen
+[?] Wallbox für E-Auto beantragen? #auto #zukunft
+    Förderung ist gerade günstig
+    Aber noch kein E-Auto...
+
+Digitales & Tech
+[ ] ! Backup-Strategie überarbeiten #tech #backup
+    3-2-1 Regel umsetzen
+    Cloud-Backup einrichten
+    Verschlüsselung nicht vergessen
+[@] Alte E-Mails aufräumen #tech #digital
+    Inbox Zero als Ziel
+    Unsubscribe von Newslettern die ich nicht lese
+[ ] Passwort-Manager aufräumen #tech #security
+    Doppelte Einträge löschen
+    Schwache Passwörter aktualisieren
+    2FA überall aktivieren wo möglich
+[x] Neues MacOS installiert #tech
+    Migration hat problemlos geklappt
+[x] iPhone-Backup erstellt #tech #backup
+[ ] Smart-Home aufräumen #tech #home
+    Nicht genutzte Szenen löschen
+    Automationen überprüfen
+    Firmware-Updates einspielen
+[?] NAS anschaffen? #tech #decision #backup
+    Synology oder QNAP?
+    Overkill für meine Bedürfnisse?
+
+Hobbies - Fotografie
+[@] Lightroom-Katalog aufräumen #foto #organisation
+    Alte RAW-Dateien aussortieren
+    Beste Bilder von 2025 exportieren
+    Keywords vervollständigen
+[ ] Fotowalk im Park planen #foto -> 2026-04
+    Frühlingsblumen fotografieren
+    Goldene Stunde nutzen
+    Vielleicht andere Fotografen einladen
+[x] Neues Objektiv eingetroffen #foto #gear
+    Das 35mm f/1.4
+    Erste Tests waren vielversprechend
+[ ] Portfolio-Website aktualisieren #foto #web
+    Neue Arbeiten hochladen
+    About-Seite überarbeiten
+    Kontaktformular reparieren
+
+Hobbies - Kochen
+[ ] Neues Rezept ausprobieren: Pad Thai #kochen
+    Zutaten besorgen
+    YouTube-Tutorial nochmal anschauen
+[@] Meal Prep für die Woche #kochen #organisation
+    Sonntag Abend kochen
+    5 Portionen vorbereiten
+[x] Sauerteig-Starter gefüttert #kochen #baking
+[ ] Kochbuch "Salt Fat Acid Heat" durcharbeiten #kochen #learning
+    Theorie-Kapitel sind super interessant
+    Pro Woche ein Rezept ausprobieren
+[~] Marmelade einkochen #kochen
+    Saison ist vorbei
+    Nächstes Jahr wieder
+
+Hobbies - Gaming
+[ ] Elden Ring DLC durchspielen #gaming
+    Bin bei 40% laut Guide
+    Den einen Boss schaffe ich einfach nicht
+    Vielleicht Build umspecen?
+[@] Steam-Bibliothek aufräumen #gaming #digital
+    Spiele kategorisieren
+    Backlog-Liste erstellen
+    Realistische Prioritäten setzen
+[x] Baldur's Gate 3 durchgespielt #gaming
+    Was für ein Meisterwerk
+    Zweiter Durchgang als Dark Urge?
+
+Kreativ-Projekte
+[ ] !! Blog-Artikel fertigschreiben #writing #blog -> 2026-03-05
+    Thema: Produktivitätsmethoden im Vergleich
+    Outline steht bereits
+    Mindestens 2000 Wörter
+    Screenshots und Grafiken erstellen
+[@] Podcast-Idee ausarbeiten #creative #project
+    Format festlegen
+    Equipment recherchieren
+    Erste Gäste anfragen?
+[ ] Sketchbook anfangen #creative #art
+    Jeden Tag eine kleine Zeichnung
+    Qualität egal, Quantität zählt
+[?] Newsletter starten? #creative #writing
+    Nische finden
+    Platform auswählen (Substack?)
+    Wer würde das lesen?
+
+Langfristige Ziele 2026
+[ ] Notgroschen auf 6 Monatsgehälter aufstocken #goals #finanzen -> 2026-12
+    Aktuell bei 4 Monaten
+    Jeden Monat 500 Euro zur Seite legen
+[@] Spanisch auf B1-Niveau bringen #goals #learning -> 2026-12
+    Aktuell A2
+    Tandem-Partner suchen
+    Spanische Serien schauen
+[ ] 52 Bücher lesen Challenge #goals #reading -> 2026-12
+    Ein Buch pro Woche
+    Aktueller Stand: 8 Bücher
+    Mix aus Sachbuch und Belletristik
+[ ] Halbmarathon laufen #goals #fitness -> 2026-10
+    Event in der Stadt finden
+    Trainingsplan aufstellen
+    Aktuell: 10km in 55 Minuten
+[?] Beförderung anstreben? #goals #career
+    Gespräch mit Manager suchen
+    Sichtbarkeit erhöhen
+    Oder lieber Work-Life-Balance priorisieren?
+
+Irgendwann / Vielleicht
+[ ] Japanisch lernen anfangen #someday #learning
+[ ] Eigene App entwickeln #someday #project
+[ ] Fallschirmspringen ausprobieren #someday #adventure
+[ ] Motorrad-Führerschein machen #someday
+[ ] Ein Buch schreiben #someday #creative
+[ ] Tauchen lernen (PADI Zertifikat) #someday #sport
+[ ] Tiny House Urlaub machen #someday #travel
+[ ] Keramik-Kurs besuchen #someday #creative
+[ ] Bienen halten anfangen #someday #hobby
+[ ] Camper-Van ausbauen #someday #project
+[~] Krypto verstehen #someday
+    Habe das Interesse verloren
+
+Warten auf Andere
+[?] Angebot vom Handwerker #waiting #wohnung
+    Vor 2 Wochen angefragt
+    Nochmal nachhaken
+[@] Rückmeldung von Max wegen Umzugshilfe #waiting #soziales
+    Sollte sich diese Woche melden
+[ ] Paket von Amazon #waiting
+    Tracking sagt: Unterwegs
+    Sollte morgen ankommen
+[ ] Bestätigung Urlaubsantrag #waiting #arbeit
+    Chef ist diese Woche auf Dienstreise
+[~] Steuerbescheid #waiting #finanzen
+    Kam letzte Woche
+    Sieht gut aus
+
+Parser Tasks
+[ ] Einfacher Task ohne alles
+[x] Erledigter Task ohne Extras
+[@] Ongoing Task minimal
+[~] Obsoleter Task minimal
+[?] Task mit Fragezeichen minimal
+[ ] ! Priorität 1 Task #test
+[ ] !! Priorität 2 Task #test
+[ ] !!! Priorität 3 Task #test
+[ ] Task mit Tag ohne Value #tagtest
+[ ] Task mit Tag mit Value #key=value
+[ ] Task mit Tag mit quoted Value #config="some value"
+[ ] Task mit Tag mit single-quoted Value #name='O Brien'
+[ ] Task mit mehreren Tags #tag1 #tag2 #tag3=foo
+[ ] Task mit Datum -> 2026-03-15
+[ ] Task mit Jahr-Monat Datum -> 2026-03
+[ ] Task mit Jahr Datum -> 2026
+[ ] Task mit Wochen-Datum -> 2026-W12
+[ ] Task mit Quartals-Datum -> 2026-Q2
+[ ] Task mit Datum in Vergangenheit -> 2024-01-15
+[ ] Task mit Datum und Tags #project -> 2026-04-01 #urgent
+[ ] !! Priorität und Datum und Tags #complex -> 2026-05-15 #test
+    Continuation Line 1
+    Continuation Line 2
+    Continuation Line 3
+[ ] Task mit Sonderzeichen: Quotes "test" und 'test' und Umlaute äöüß
+[ ] Task mit Zahlen im Text: 100 items, 50% complete, $99.99
+[ ] Task mit URLs: check https://example.com/path?query=1
+[ ] Task mit E-Mail: contact test@example.com for details
+[ ] Task mit Code: use `console.log()` for debugging
+[ ] Task mit langer Zeile die definitiv über die normale Bildschirmbreite hinausgeht und daher umgebrochen werden sollte aber trotzdem korrekt als einzelne Zeile geparst wird
+[ ] Task mit Emoji: Review the PR and celebrate the merge party
+[ ] Task mit ausschließlich Continuation
+    Dies ist eine Continuation Line
+    Und noch eine
+    Und eine dritte
+    Und eine vierte Zeile zur Sicherheit
+[@] Ongoing mit allem #full=test -> 2026-08-15
+    Erste Continuation
+    Zweite Continuation mit #hashtag drin
+    Dritte mit -> 2026-01-01 fake Datum
+[ ] ! Task mit Slash-Datum -> 2026/04/15
+[ ] Edge: Leerer Tag am Ende #
+[ ] Edge: Tag mit Bindestrich #my-tag-name
+[ ] Edge: Tag mit Unterstrich #my_tag_name
+[ ] Edge: Tag mit Zahlen #tag123
+[ ] Edge: Mehrere Daten -> 2026-03-01 und -> 2026-03-15
+    Nur das erste sollte geparst werden
+[x] Completed mit Priorität und allem !! #done #tested="yes" -> 2025-12-31
+    War ein komplexer Test
+    Hat aber funktioniert
