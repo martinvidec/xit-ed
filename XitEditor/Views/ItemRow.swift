@@ -26,16 +26,40 @@ struct ItemRow: View {
                     }
 
                     if isEditing {
-                        TextField("Description", text: $editedDescription)
-                            .textFieldStyle(.plain)
-                            .focused($isTextFieldFocused)
-                            .onSubmit {
-                                item.description = editedDescription
+                        VStack(alignment: .leading, spacing: 4) {
+                            TextEditor(text: $editedDescription)
+                                .font(.body)
+                                .scrollContentBackground(.hidden)
+                                .focused($isTextFieldFocused)
+                                .frame(minHeight: 24, maxHeight: 200)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(4)
+                                .background(Color(nsColor: .textBackgroundColor))
+                                .cornerRadius(4)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+
+                            Text("⌘↩ speichern · esc abbrechen")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
+                        .onExitCommand {
+                            // Escape - discard changes
+                            isTextFieldFocused = false
+                            onEndEdit()
+                        }
+                        .background(
+                            // Hidden button for Cmd+Enter shortcut
+                            Button("") {
+                                saveEditedDescription()
+                                isTextFieldFocused = false
                                 onEndEdit()
                             }
-                            .onExitCommand {
-                                onEndEdit()
-                            }
+                            .keyboardShortcut(.return, modifiers: .command)
+                            .opacity(0)
+                        )
                     } else {
                         DescriptionText(
                             text: item.description,
@@ -44,8 +68,8 @@ struct ItemRow: View {
                     }
                 }
 
-                // Continuation lines
-                if !item.continuationLines.isEmpty {
+                // Continuation lines (hidden during editing)
+                if !isEditing && !item.continuationLines.isEmpty {
                     VStack(alignment: .leading, spacing: 2) {
                         ForEach(item.continuationLines, id: \.self) { line in
                             Text(line)
@@ -91,11 +115,22 @@ struct ItemRow: View {
         }
         .onChange(of: isEditing) { editing in
             if editing {
-                editedDescription = item.description
+                editedDescription = item.fullDescription
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     isTextFieldFocused = true
                 }
             }
+        }
+    }
+
+    private func saveEditedDescription() {
+        let lines = editedDescription.components(separatedBy: "\n")
+        if lines.isEmpty {
+            item.description = ""
+            item.continuationLines = []
+        } else {
+            item.description = lines[0]
+            item.continuationLines = Array(lines.dropFirst())
         }
     }
 }
