@@ -6,6 +6,7 @@ struct ContentView: View {
     @State private var selectedItemId: UUID?
     @State private var editingGroupId: UUID?
     @State private var editingItemId: UUID?
+    @State private var statusFilter: XitStatus? = nil
 
     var body: some View {
         NavigationSplitView {
@@ -65,7 +66,8 @@ struct ContentView: View {
                 ItemListView(
                     group: $document.document.groups[groupIndex],
                     selectedItemId: $selectedItemId,
-                    editingItemId: $editingItemId
+                    editingItemId: $editingItemId,
+                    statusFilter: $statusFilter
                 )
             } else if !document.document.groups.isEmpty {
                 // Placeholder while onAppear sets the selection
@@ -246,15 +248,24 @@ struct ContentView: View {
 
     private func navigateItems(direction: Int) {
         guard let groupIndex = document.document.groups.firstIndex(where: { $0.id == selectedGroupId }) else { return }
-        let items = document.document.groups[groupIndex].items
-        guard !items.isEmpty else { return }
+        let allItems = document.document.groups[groupIndex].items
+
+        // Filter items based on current filter
+        let filteredItems: [XitItem]
+        if let filter = statusFilter {
+            filteredItems = allItems.filter { $0.status == filter }
+        } else {
+            filteredItems = allItems
+        }
+
+        guard !filteredItems.isEmpty else { return }
 
         if let currentId = selectedItemId,
-           let currentIndex = items.firstIndex(where: { $0.id == currentId }) {
-            let newIndex = max(0, min(items.count - 1, currentIndex + direction))
-            selectedItemId = items[newIndex].id
+           let currentIndex = filteredItems.firstIndex(where: { $0.id == currentId }) {
+            let newIndex = max(0, min(filteredItems.count - 1, currentIndex + direction))
+            selectedItemId = filteredItems[newIndex].id
         } else {
-            selectedItemId = items.first?.id
+            selectedItemId = filteredItems.first?.id
         }
     }
 }
