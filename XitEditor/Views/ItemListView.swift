@@ -4,8 +4,8 @@ struct ItemListView: View {
     @Binding var group: XitGroup
     @Binding var selectedItemId: UUID?
     @Binding var editingItemId: UUID?
+    @Binding var statusFilter: XitStatus?
     @State private var newItemText = ""
-    @State private var statusFilter: XitStatus? = nil
     @FocusState private var isAddingItem: Bool
 
     private var filteredItemIndices: [Int] {
@@ -29,6 +29,28 @@ struct ItemListView: View {
                 }
                 .padding()
                 .background(Color(nsColor: .windowBackgroundColor))
+            }
+
+            // Filter indicator
+            if let filter = statusFilter {
+                HStack(spacing: 8) {
+                    Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                        .foregroundColor(.accentColor)
+                    Text("Gefiltert: \(filter.displayName)")
+                        .font(.subheadline)
+                    Spacer()
+                    Button {
+                        statusFilter = nil
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Filter aufheben")
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+                .background(Color.accentColor.opacity(0.1))
             }
 
             Divider()
@@ -222,6 +244,7 @@ struct ItemStatsView: View {
             XitItem(status: .open, priority: 1, description: "Test item #work", continuationLines: [], tags: [], dueDate: nil)
         ])),
         selectedItemId: .constant(nil),
-        editingItemId: .constant(nil)
+        editingItemId: .constant(nil),
+        statusFilter: .constant(nil)
     )
 }
